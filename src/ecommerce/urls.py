@@ -10,6 +10,7 @@ from products.views import (
             ProductDetailView,
             ProductFeaturedListView,
             ProductFeaturedDetailView,
+            ProductDetailSlugView,
             detail_view,
             shop_view
             )
@@ -19,7 +20,8 @@ urlpatterns = [
     url(r'^shop-fbv/$', shop_view, name='shop'),
     url(r'^product-fbv/(?P<pk>\d+)/$', detail_view),
     url(r'^shop/$', ProductListView.as_view()),
-    url(r'^product/(?P<pk>\d+)/$', ProductDetailView.as_view()),
+    # url(r'^product/(?P<pk>\d+)/$', ProductDetailView.as_view()),
+    url(r'^product/(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view()),
     url(r'^featured/$', ProductFeaturedListView.as_view()),
     url(r'^featured/(?P<pk>\d+)/$', ProductFeaturedDetailView.as_view()),
     url(r'^login/$', login_view, name='login'),
