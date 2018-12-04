@@ -91,7 +91,7 @@ class ProductDetailSlugView(DetailView):
             product_list = Product.objects.filter(slug=slug)
             return product_list.first()
         except:
-            raise Http404("ebat!!!")
+            raise Http404("ebat")
         return product_list
 
     # def get_queryset(self, *args, **kwargs):
@@ -157,57 +157,57 @@ class ProductFeaturedDetailView(DetailView):
 
 ##### Function based View ###################################################################################################################################################################
 
-# shop view
-
-def shop_view(request):
-    object_list = App.objects.all()
-    product_list = Product.objects.all()
-    context={
-        'object_list':object_list,
-        'product_list':product_list
-    }
-    return render(request, "shop.html", context)
+# # shop view
+#
+# def shop_view(request):
+#     object_list = App.objects.all()
+#     product_list = Product.objects.all()
+#     context={
+#         'object_list':object_list,
+#         'product_list':product_list
+#     }
+#     return render(request, "shop.html", context)
 
 
 ##### Function based View ###################################################################################################################################################################
 
-# detail view
-
-def detail_view(request, pk=None, *args, **kwargs):
-    object_list = App.objects.all()
-    product_list = Product.objects.all()
-
-    # instance = Product.objects.get(pk=pk)
-    # instance = get_object_or_404(Product, pk=pk)
-
-# Featured
-    # instance = Product.objects.get(pk=pk, featured=True)
-    # instance = get_object_or_404(Product, pk=pk, featured=True)
-
-# Exception for get() method ############################################################################################################33
-    # try:
-    #     instance = Product.objects.get(id=pk)
-    # except Product.DoesNotExist:
-    #     print('no product here')
-    #     raise Http404("Product doesnt't exist!")
-    # except:
-    #     print("hih")
-
-# Filter method ############################################################################################################################
-    # qs = Product.objects.filter(id=pk)
-    # if qs.exists() and qs.count() == 1:
-    #     instance = qs.first()
-    # else:
-    #     raise Http404("Product doesn't exist")
-
-# Custom object manager query ##################################################################################################
-    instance = Product.objects.get_by_id(pk)
-    if instance is None:
-        raise Http404("Product doesnt't exist!")
-
-    context={
-        'object_list':object_list,
-        'object':instance,
-        'product_list':product_list
-    }
-    return render(request, "product-detail.html", context)
+# # detail view
+#
+# def detail_view(request, pk=None, *args, **kwargs):
+#     object_list = App.objects.all()
+#     product_list = Product.objects.all()
+#
+#     # instance = Product.objects.get(pk=pk)
+#     # instance = get_object_or_404(Product, pk=pk)
+#
+# # Featured
+#     # instance = Product.objects.get(pk=pk, featured=True)
+#     # instance = get_object_or_404(Product, pk=pk, featured=True)
+#
+# # Exception for get() method ############################################################################################################33
+#     # try:
+#     #     instance = Product.objects.get(id=pk)
+#     # except Product.DoesNotExist:
+#     #     print('no product here')
+#     #     raise Http404("Product doesnt't exist!")
+#     # except:
+#     #     print("hih")
+#
+# # Filter method ############################################################################################################################
+#     # qs = Product.objects.filter(id=pk)
+#     # if qs.exists() and qs.count() == 1:
+#     #     instance = qs.first()
+#     # else:
+#     #     raise Http404("Product doesn't exist")
+#
+# # Custom object manager query ##################################################################################################
+#     instance = Product.objects.get_by_id(pk)
+#     if instance is None:
+#         raise Http404("Product doesnt't exist!")
+#
+#     context={
+#         'object_list':object_list,
+#         'object':instance,
+#         'product_list':product_list
+#     }
+#     return render(request, "product-detail.html", context)
