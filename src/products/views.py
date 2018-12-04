@@ -9,6 +9,60 @@ from .models import Product
 
 ##### Class based View #############################################################################################################################################################
 
+# Featured View
+
+class ProductFeaturedListView(ListView):
+    object_list = App.objects.all()
+    # queryset = Product.objects.all()
+    template_name = "products/list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductFeaturedListView, self).get_context_data(*args,**kwargs)
+        print(context)
+        object_list = App.objects.all()
+        # queryset = Product.objects.all()
+        context['object_list'] = object_list
+        # context['product_list'] = queryset
+        return context
+
+    # custom query
+    def get_queryset(self, *args, **kwargs):
+        request =  self.request
+        product_list = Product.objects.all().featured()
+        return product_list
+
+# Featured DetailView
+
+class ProductFeaturedDetailView(DetailView):
+    # object_list = App.objects.all()
+    queryset = Product.objects.all().featured()
+    template_name = "products/featured-detail.html"
+
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(ProductFeaturedDetailView, self).get_context_data(*args,**kwargs)
+    #     print(context)
+    #     object_list = App.objects.all()
+    #     # queryset = Product.objects.all()
+    #     context['object_list'] = object_list
+    #     # context['product_list'] = queryset
+    #     return context
+
+    # custom query
+    # def get_object(self, *args, **kwargs):
+    #     request =  self.request
+    #     pk = self.kwargs.get('pk')
+    #     product_list = Product.objects.get_by_id(pk)
+    #     if product_list is None:
+    #         raise Http404("Product doesnt't exist!")
+    #     return product_list
+
+    # custom query
+    # def get_queryset(self, *args, **kwargs):
+    #     request =  self.request
+    #     product_list = Product.objects.featured()
+    #     return product_list
+
+
 # List View
 
 class ProductListView(ListView):
@@ -30,6 +84,7 @@ class ProductListView(ListView):
         request =  self.request
         product_list = Product.objects.all()
         return product_list
+
 
 
 
@@ -90,6 +145,10 @@ def detail_view(request, pk=None, *args, **kwargs):
 
     # instance = Product.objects.get(pk=pk)
     # instance = get_object_or_404(Product, pk=pk)
+
+# Featured
+    # instance = Product.objects.get(pk=pk, featured=True)
+    # instance = get_object_or_404(Product, pk=pk, featured=True)
 
 # Exception for get() method ############################################################################################################33
     # try:
